@@ -84,7 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Appointment.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -166,6 +165,10 @@
     <ProjectReference Include="..\..\..\..\..\Downloads\QuickWPFMonthCalendar\QuickWPFMonthCalendar.vbproj">
       <Project>{a9be9c4e-843b-4a28-b1b3-e2533e2394c2}</Project>
       <Name>QuickWPFMonthCalendar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appointment\Appointment.csproj">
+      <Project>{8a7214d7-a7de-449e-b84c-7db718e0194a}</Project>
+      <Name>Appointment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Windows;
-using FirstFloor.ModernUI.Presentation;
-using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Threading;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using System.Net;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Text;
 using QuickWPFMonthCalendar;
+using System.Drawing;
 
 namespace WAT
 {
@@ -25,29 +21,29 @@ namespace WAT
         private static string login = Encryptor.Decrypt(Properties.Settings.Default.Login);
         private static string pass = Encryptor.Decrypt(Properties.Settings.Default.Pass);
         private static string groupNo = Encryptor.Decrypt(Properties.Settings.Default.Group);
-        public static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+        public static System.Windows.Forms.NotifyIcon ni;
         public static System.Windows.Forms.WebBrowser webB = new System.Windows.Forms.WebBrowser();
         public static System.Windows.Forms.Form frm = new Form();
         private string envPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\WAT - Plan";
-        private XmlSerializer serializer = new XmlSerializer(typeof(List<SingleEvent>));
-        private List<SingleEvent> schedule;
-        /// <summary>
-        /// 
-        /// </summary>
-        private List<Appointment> _myAppointmentsList = new List<Appointment>();
+        private XmlSerializer serializer = new XmlSerializer(typeof(List<Appointment.Appointment>));
+        private List<Appointment.Appointment> schedule;
         public MainWindow()
         {
             InitializeComponent();
-            ni.Icon = Properties.Resources.KZ;
-            ni.Visible = true;
-            ni.DoubleClick +=
-                delegate (object sender, EventArgs args)
-                {
-                    this.Show();
-                    this.WindowState = WindowState.Normal;
-                };
+            textBox.Visibility = Visibility.Hidden;
+
+            //ni = new System.Windows.Forms.NotifyIcon();
+            //ni.Icon = Properties.Resources.KZ;
+            //ni.Visible = true;
+            //ni.DoubleClick +=
+            //    delegate (object sender, EventArgs args)
+            //    {
+            //        this.Show();
+            //        this.WindowState = WindowState.Normal;
+            //    };
+
             //
-            frm.Visible = true;
+            //frm.Visible = true;
             //
             frm.Width = 500;
             frm.Height = 500;
@@ -56,29 +52,18 @@ namespace WAT
             webB.Dock = DockStyle.Fill;
             //load schedule
             schedule = readScheduleFromXMLFile(envPath, "default.xml");
-
             ///
-            Random rand = new Random(System.DateTime.Now.Second);
-
-            for (int i = 1; i <= 50; i++)
-            {
-                Appointment apt = new Appointment();
-                apt.AppointmentID = i;
-                apt.StartTime = new System.DateTime(System.DateTime.Now.Year, rand.Next(1, 12), rand.Next(1, System.DateTime.DaysInMonth(System.DateTime.Now.Year, System.DateTime.Now.Month)));
-                apt.EndTime = apt.StartTime;
-                apt.Subject = "Random apt, blah blah";
-                _myAppointmentsList.Add(apt);
-            }
-
             SetAppointments();
             Calendar.DayBoxDoubleClicked += DayBoxDoubleClicked_event;
             Calendar.AppointmentDblClicked += AppointmentDblClicked;
             Calendar.DisplayMonthChanged += DisplayMonthChanged;
             //
+
+            //
         }
         private void SetAppointments()
         {
-            Calendar.MonthAppointments = _myAppointmentsList.FindAll(new System.Predicate<Appointment>((Appointment apt) => apt.StartTime != null && Convert.ToDateTime(apt.StartTime).Month == this.Calendar.DisplayStartDate.Month && Convert.ToDateTime(apt.StartTime).Year == this.Calendar.DisplayStartDate.Year));
+            Calendar.MonthAppointments = schedule.FindAll(new System.Predicate<Appointment.Appointment>((Appointment.Appointment apt) => apt.StartTime != null && Convert.ToDateTime(apt.StartTime).Month == this.Calendar.DisplayStartDate.Month && Convert.ToDateTime(apt.StartTime).Year == this.Calendar.DisplayStartDate.Year));
         }
         private void DayBoxDoubleClicked_event(NewAppointmentEventArgs e)
         {
@@ -95,30 +80,31 @@ namespace WAT
             SetAppointments();
         }
         #region XMLParser
-        public List<SingleEvent> readScheduleFromXMLFile(string filePath, string fileName)
+        public List<Appointment.Appointment> readScheduleFromXMLFile(string filePath, string fileName)
         {
             try
             {
                 using (FileStream stream = File.OpenRead(filePath + "\\" + fileName))
                 {
-                    List<SingleEvent> dezerializedList = (List<SingleEvent>)serializer.Deserialize(stream);
+                    List<Appointment.Appointment> dezerializedList = (List<Appointment.Appointment>)serializer.Deserialize(stream);
                     return dezerializedList;
                 }
             }
-            catch { return new List<SingleEvent>(); }
+            catch { return new List<Appointment.Appointment>(); }
         }
-        public bool writeScheduleToXMLFile(string filePath, string fileName, List<SingleEvent> list)
+        public bool writeScheduleToXMLFile(string filePath, string fileName, List<Appointment.Appointment> list)
         {
             if (list == null)
                 return false;
+            Directory.CreateDirectory(filePath);
+            using (FileStream stream = File.Open(filePath + "\\" + fileName, FileMode.Create))
+            {
+                serializer.Serialize(stream, list);
+            }
+            return true;
             try
             {
-                Directory.CreateDirectory(filePath);
-                using (FileStream stream = File.Open(filePath + "\\" + fileName, FileMode.Create))
-                {
-                    serializer.Serialize(stream, list);
-                }
-                return true;
+
             }
             catch
             {
@@ -149,8 +135,10 @@ namespace WAT
         }
         #endregion
 
-        public async void button_ShowChanges_Click(object sender, RoutedEventArgs e)
+        private async void download(string groupNumber, int seasonNum, DateTime when, AsyncCompletedEventHandler asyncCompletedEventHandler, DownloadProgressChangedEventHandler downloadProgressChangedEventHandler)
         {
+            textBox.Visibility = Visibility.Visible;
+            progress.Value = 0;
             webB.Navigate("https://s1.wcy.wat.edu.pl/ed/");
             //
             await PageLoad(10);
@@ -183,6 +171,7 @@ namespace WAT
                 }
             }
             //
+            progress.Value = 15;
             await PageLoad(10);
             //
             string[] parts2 = webB.Url.AbsoluteUri.Split('?');
@@ -193,7 +182,7 @@ namespace WAT
 
             string[] args = tmp.Split('&');
             string str;
-            if (Properties.Settings.Default.Season == 0)
+            if (seasonNum == 0)
             {
                 str = "2";
             }
@@ -201,52 +190,151 @@ namespace WAT
             {
                 str = "1";
             }
-            int year = DateTime.Now.Year - 1;
-            if (DateTime.Now.Month > 7)
+            int year = when.Year - 1;
+            if (when.Month > 7)
                 year++;
-            string URl = "https://s1.wcy.wat.edu.pl/ed/logged_inc.php?" + args[0] + "&mid=328&iid=" + year + str + "&exv=" + Encryptor.Decrypt(Properties.Settings.Default.Group) + "&pos=0&rdo=1&" + args[args.Length - 1];
+            string URl = "https://s1.wcy.wat.edu.pl/ed/logged_inc.php?" + args[0] + "&mid=328&iid=" + year + str + "&exv=" + groupNumber + "&pos=0&rdo=1&" + args[args.Length - 1];
             webB.Navigate(URl);
             //
+            progress.Value = 30;
             await PageLoad(10);
             //
-            webB.Document.InvokeScript("showGroupPlan", new string[] { Encryptor.Decrypt(Properties.Settings.Default.Group) });
+            //webB.Document.InvokeScript("showGroupPlan", new string[] { groupNumber });
             //
-            await PageLoad(10);
+            //progress.Value = 45;
+            //await PageLoad(10);
             //
             WebClient webClient = new WebClient();
-            webClient.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(Completed);
-            webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+            webClient.DownloadFileCompleted += asyncCompletedEventHandler;
+            webClient.DownloadProgressChanged += downloadProgressChangedEventHandler;
             Uri uri = new Uri("https://s1.wcy.wat.edu.pl/ed/" + webB.Document.InvokeScript("prepareURL") + "DTXT");
             Directory.CreateDirectory(envPath);
+            progress.Value = 50;
             webClient.DownloadFileAsync(uri, envPath + "\\tmp");
-            //
-            string plan = File.ReadAllText(envPath + "\\tmp");
+        }
+
+        public void button_ShowChanges_Click(object sender, RoutedEventArgs e)
+        {
+            download(Encryptor.Decrypt(Properties.Settings.Default.Group),
+                Properties.Settings.Default.Season, DateTime.Now,
+                new System.ComponentModel.AsyncCompletedEventHandler(CompletedNewSchedule),
+                new DownloadProgressChangedEventHandler(ProgressChanged));
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            download(Encryptor.Decrypt(Properties.Settings.Default.Group),
+                Properties.Settings.Default.Season, DateTime.Now,
+                new System.ComponentModel.AsyncCompletedEventHandler(CompletedCheckSchedule),
+                new DownloadProgressChangedEventHandler(ProgressChanged));
+        }
+        private List<Appointment.Appointment> getAppointmentsFromFile(string fileName)
+        {
+            string plan = File.ReadAllText(envPath + "\\" + fileName, Encoding.Default);
             string[] lines = plan.Split('\n');
-            List<SingleEvent> allEvents = new List<SingleEvent>();
+            List<Appointment.Appointment> allEvents = new List<Appointment.Appointment>();
             foreach (string line in lines)
             {
+                Appointment.Appointment ev= null;
                 try
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length < 6)
-                        continue;
-                    SingleEvent ev = new SingleEvent(parts[0], parts[1], parts[2] + " " + parts[3], parts[4] + " " + parts[5]);
-                    allEvents.Add(ev);
+                    string firstLetters = "";
+                    string subject;
+                    string a, b;
+                    string[] arr = parts[0].Split(' ');
+                    for (int i = 0; i < arr.Length - 2; i++)
+                    {
+                        firstLetters += arr[i].Substring(0, 1).ToUpper();
+                    }
+                    try { a = arr[arr.Length - 2]; }
+                    catch { a = ""; }
+                    try { b = arr[arr.Length - 1]; }
+                    catch { b = ""; }
+                    subject = firstLetters + " " + a + " " + b + " " + parts[1];
+                    try
+                    {
+                        ev = new Appointment.Appointment(
+                                                subject, firstLetters, parts[1], parts[0],
+                                                DateTime.ParseExact(parts[2] + " " + parts[3], "yyyy-MM-dd HH:mm",
+                                                System.Globalization.CultureInfo.InvariantCulture),
+                                                DateTime.ParseExact(parts[4] + " " + parts[5], "yyyy-MM-dd HH:mm",
+                                                System.Globalization.CultureInfo.InvariantCulture));
+                        allEvents.Add(ev);
+                    }
+                    catch { ; }
                 }
-                catch { }
-                ;
+                catch {}
+            }
+            //kolorowanie
+            Dictionary<string, Color> dict = new Dictionary<string, Color>();
+            Color clr;
+            Random randomGen = new Random();
+            foreach (var apt in allEvents)
+            {
+                if (dict.TryGetValue(apt._Short, out clr))
+                {
+                    apt.BGA = clr.A;
+                    apt.BGR = clr.R;
+                    apt.BGG = clr.G;
+                    apt.BGB = clr.B;
+                }
+                else
+                {
+                    KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+                    KnownColor randomColorName = names[randomGen.Next(names.Length)];
+                    Color randomColor = Color.FromKnownColor(randomColorName);
+                    dict.Add(apt._Short, randomColor);
+                    apt.BGA = randomColor.A;
+                    apt.BGR = randomColor.R;
+                    apt.BGG = randomColor.G;
+                    apt.BGB = randomColor.B;
+                }
+                apt.BBA = Color.DarkGray.A;
+                apt.BBR = Color.DarkGray.R;
+                apt.BBG = Color.DarkGray.G;
+                apt.BBB = Color.DarkGray.B;
             }
             //
+            return allEvents;
         }
-
-        private void Completed(object sender, AsyncCompletedEventArgs e)
+        private void CompletedNewSchedule(object sender, AsyncCompletedEventArgs e)
         {
-            ;
+            List<Appointment.Appointment> allEvents = getAppointmentsFromFile("tmp");
+            //
+            schedule = allEvents;
+            //
+            writeScheduleToXMLFile(envPath, "default.xml", schedule);
+            SetAppointments();
+            textBox.Visibility = Visibility.Hidden;
         }
-
+        private void CompletedCheckSchedule(object sender, AsyncCompletedEventArgs e)
+        {
+            List<Appointment.Appointment> allEvents = getAppointmentsFromFile("tmp");
+            //
+            bool hasChanged = false;
+            if (schedule.Count == allEvents.Count)
+                for (int i = 0; i < schedule.Count; i++)
+                {
+                    if (!schedule[i].IsEqualTo(allEvents[i]))
+                        hasChanged = true;
+                }
+            else
+                hasChanged = true;
+            //wyświetlić nowy plan zajec
+            //zapytac czy zaktualizowac
+            if (hasChanged)
+                if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show("Czy chesz zaktualizować plan zajęć?", "Wykryto zmiany w planie zajęć", MessageBoxButtons.YesNo))
+                {
+                    schedule = allEvents;
+                    writeScheduleToXMLFile(envPath, "default.xml", schedule);
+                    //
+                }
+            SetAppointments();
+            textBox.Visibility = Visibility.Hidden;
+        }
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            ;
+            progress.Value += e.ProgressPercentage;
         }
 
         private void ShowSettings_Click(object sender, RoutedEventArgs e)
@@ -274,54 +362,6 @@ namespace WAT
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            string plan = File.ReadAllText(envPath + "\\tmp", Encoding.Default);
-            string[] lines = plan.Split('\n');
-            List<SingleEvent> allEvents = new List<SingleEvent>();
-            foreach (string line in lines)
-            {
-                try
-                {
-                    string[] parts = line.Split(',');
-                    if (parts.Length < 6)
-                        continue;
-                    SingleEvent ev = new SingleEvent(parts[0], parts[1], parts[2] + " " + parts[3], parts[4] + " " + parts[5]);
-                    allEvents.Add(ev);
-                }
-                catch { }
-                ;
-            }
-            //
-            bool hasChanged = false;
-            if (schedule.Count == allEvents.Count)
-                for (int i = 0; i < schedule.Count; i++)
-                {
-                    if (!schedule[i].IsEqualTo(allEvents[i]))
-                        hasChanged = true;
-                }
-            else
-                hasChanged = true;
-
-            //wyświetlić nowy plan zajec
-            //zapytac czy zaktualizowac
-            if (hasChanged)
-                if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show("Czy chesz zaktualizować plan zajęć?", "Wykryto zmiany w planie zajęć", MessageBoxButtons.YesNo))
-                {
-                    schedule = allEvents;
-                    writeScheduleToXMLFile(envPath, "default.xml", schedule);
-
-                }
-            //
-
-            //writeScheduleToXMLFile(envPath, "tmp", new List<SingleEvent>());
-            //WebClient webClient = new WebClient();
-            //webClient.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(Completed);
-            //webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-            //Uri uri = new Uri("https://s1.wcy.wat.edu.pl/ed/logged.php?sid=db0bb722ae892f8cea5917cc5e25cc32&mid=328&iid=20165&vrf=32820165&rdo=1&pos=0&exv=I6G2S4&opr=DTXT");
-            //webClient.DownloadFileAsync(uri, envPath + "\\tmp");
-        }
-
         private async Task PageLoad(int TimeOut)
         {
             TaskCompletionSource<bool> PageLoaded = null;
@@ -341,6 +381,25 @@ namespace WAT
                 TimeElapsed++;
                 if (TimeElapsed >= TimeOut * 100)
                     PageLoaded.TrySetResult(true);
+            }
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "Plik tekstowy|*.txt|Wszystko|*.*";
+            ofd.Title = "Wczytaj plan zajęć";
+            ofd.InitialDirectory = envPath;
+
+            DialogResult openFileDialogResult = ofd.ShowDialog();
+            if (openFileDialogResult == System.Windows.Forms.DialogResult.OK && ofd.FileName != "")
+            {
+                List<Appointment.Appointment> allEvents = getAppointmentsFromFile("tmp");
+                schedule = allEvents;
+                //
+                writeScheduleToXMLFile(envPath, "default.xml", schedule);
+                SetAppointments();
             }
         }
     }
