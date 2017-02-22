@@ -13,6 +13,7 @@ using System.Net;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Text;
+using QuickWPFMonthCalendar;
 
 namespace WAT
 {
@@ -30,6 +31,10 @@ namespace WAT
         private string envPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\WAT - Plan";
         private XmlSerializer serializer = new XmlSerializer(typeof(List<SingleEvent>));
         private List<SingleEvent> schedule;
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<Appointment> _myAppointmentsList = new List<Appointment>();
         public MainWindow()
         {
             InitializeComponent();
@@ -51,9 +56,44 @@ namespace WAT
             webB.Dock = DockStyle.Fill;
             //load schedule
             schedule = readScheduleFromXMLFile(envPath, "default.xml");
+
+            ///
+            Random rand = new Random(System.DateTime.Now.Second);
+
+            for (int i = 1; i <= 50; i++)
+            {
+                Appointment apt = new Appointment();
+                apt.AppointmentID = i;
+                apt.StartTime = new System.DateTime(System.DateTime.Now.Year, rand.Next(1, 12), rand.Next(1, System.DateTime.DaysInMonth(System.DateTime.Now.Year, System.DateTime.Now.Month)));
+                apt.EndTime = apt.StartTime;
+                apt.Subject = "Random apt, blah blah";
+                _myAppointmentsList.Add(apt);
+            }
+
+            SetAppointments();
+            Calendar.DayBoxDoubleClicked += DayBoxDoubleClicked_event;
+            Calendar.AppointmentDblClicked += AppointmentDblClicked;
+            Calendar.DisplayMonthChanged += DisplayMonthChanged;
             //
         }
+        private void SetAppointments()
+        {
+            Calendar.MonthAppointments = _myAppointmentsList.FindAll(new System.Predicate<Appointment>((Appointment apt) => apt.StartTime != null && Convert.ToDateTime(apt.StartTime).Month == this.Calendar.DisplayStartDate.Month && Convert.ToDateTime(apt.StartTime).Year == this.Calendar.DisplayStartDate.Year));
+        }
+        private void DayBoxDoubleClicked_event(NewAppointmentEventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("You double-clicked on day " + Convert.ToDateTime(e.StartDate).ToShortDateString(), "Calendar Event", System.Windows.Forms.MessageBoxButtons.OK);
+        }
 
+        private void AppointmentDblClicked(int Appointment_Id)
+        {
+            System.Windows.Forms.MessageBox.Show("You double-clicked on appointment with ID = " + Appointment_Id, "Calendar Event", System.Windows.Forms.MessageBoxButtons.OK);
+        }
+
+        private void DisplayMonthChanged(MonthChangedEventArgs e)
+        {
+            SetAppointments();
+        }
         #region XMLParser
         public List<SingleEvent> readScheduleFromXMLFile(string filePath, string fileName)
         {

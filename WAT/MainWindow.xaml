@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="clr-namespace:QuickWPFMonthCalendar;assembly=QuickWPFMonthCalendar"
         xmlns:local="clr-namespace:WAT"
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="WAT.MainWindow"
         mc:Ignorable="d"
@@ -1019,6 +1020,8 @@
                         <GradientStop Color="#FF3F46C7" Offset="1"/>
                     </LinearGradientBrush>
                 </Grid.Background>
+                <cal:MonthView x:Name="Calendar" VerticalAlignment="Stretch" 
+               VerticalContentAlignment="Stretch"  />
             </Grid>
         </Grid>
     </DockPanel>
