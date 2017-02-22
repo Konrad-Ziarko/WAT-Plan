@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<AssemblyLoadList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>QuickWPFMonthCalendar.vbproj.assemblyPreLoad</FileName>
+  <ProjectFile>QuickWPFMonthCalendar.vbproj</ProjectFile>
+  <Assembly AssemblyName="System.Core" Ordinal="1" Ignore="true" />
+  <Assembly AssemblyName="System.Xml.Linq" Ordinal="2" Ignore="true" />
+  <Assembly AssemblyName="System.Data.DataSetExtensions" Ordinal="3" Ignore="true" />
+  <Assembly AssemblyName="WindowsBase" Ordinal="4" Ignore="true" />
+  <Assembly AssemblyName="PresentationCore" Ordinal="5" Ignore="true" />
+  <Assembly AssemblyName="PresentationFramework" Ordinal="6" Ignore="true" />
+  <Assembly AssemblyName="System" Ordinal="7" Ignore="true" />
+  <Assembly AssemblyName="System.Data" Ordinal="8" Ignore="true" />
+  <Assembly AssemblyName="System.Xml" Ordinal="9" Ignore="true" />
+</AssemblyLoadList>

@@ -88,7 +88,6 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SingleEvent.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,13 +161,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Downloads\QuickWPFMonthCalendar\QuickWPFMonthCalendar.vbproj">
-      <Project>{a9be9c4e-843b-4a28-b1b3-e2533e2394c2}</Project>
-      <Name>QuickWPFMonthCalendar</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Appointment\Appointment.csproj">
       <Project>{8a7214d7-a7de-449e-b84c-7db718e0194a}</Project>
       <Name>Appointment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuickWPFMonthCalendar\QuickWPFMonthCalendar.vbproj">
+      <Project>{a9be9c4e-843b-4a28-b1b3-e2533e2394c2}</Project>
+      <Name>QuickWPFMonthCalendar</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

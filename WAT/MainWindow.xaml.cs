@@ -115,7 +115,8 @@ namespace WAT
         #region TitleBar buttons
         private void button_Exit_Click(object sender, RoutedEventArgs e)
         {
-            ni.Dispose();
+            if(ni!=null)
+                ni.Dispose();
             Close();
         }
 
@@ -321,6 +322,8 @@ namespace WAT
             else
                 hasChanged = true;
             //wyświetlić nowy plan zajec
+            //albo różnice
+            //
             //zapytac czy zaktualizowac
             if (hasChanged)
                 if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show("Czy chesz zaktualizować plan zajęć?", "Wykryto zmiany w planie zajęć", MessageBoxButtons.YesNo))
