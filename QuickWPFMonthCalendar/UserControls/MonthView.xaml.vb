@@ -163,8 +163,9 @@ Partial Public Class MonthView
 
             Dim ev As New NewAppointmentEventArgs()
             If CType(e.Source, DayBoxControl).Tag IsNot Nothing Then
-                ev.StartDate = New Date(_DisplayYear, _DisplayMonth, CInt(CType(e.Source, DayBoxControl).Tag), 10, 0, 0)
-                ev.EndDate = CDate(ev.StartDate).AddHours(2)
+                ev.StartDate = New Date(_DisplayYear, _DisplayMonth, CInt(CType(e.Source, DayBoxControl).Tag), 0, 0, 0)
+                ev.EndDate = CDate(ev.StartDate).AddHours(23)
+                ev.EndDate = CDate(ev.EndDate).AddMinutes(59)
             End If
             RaiseEvent DayBoxDoubleClicked(ev)
             e.Handled = True

@@ -67,12 +67,63 @@ namespace WAT
         }
         private void DayBoxDoubleClicked_event(NewAppointmentEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("You double-clicked on day " + Convert.ToDateTime(e.StartDate).ToShortDateString(), "Calendar Event", System.Windows.Forms.MessageBoxButtons.OK);
+            string allEventsInThatDay = "";
+            foreach (var a in schedule)
+            {
+                if (a.StartTime > e.StartDate && a.EndTime < e.EndDate)
+                {
+                    allEventsInThatDay += a.Details + "\n";
+                }
+            }
+            
+            System.Windows.Forms.MessageBox.Show(allEventsInThatDay, "Calendar Event", System.Windows.Forms.MessageBoxButtons.OK);
         }
 
         private void AppointmentDblClicked(int Appointment_Id)
         {
-            System.Windows.Forms.MessageBox.Show("You double-clicked on appointment with ID = " + Appointment_Id, "Calendar Event", System.Windows.Forms.MessageBoxButtons.OK);
+            foreach(var a in schedule)
+            {
+                if (a.AppointmentID==Appointment_Id)
+                {
+                    System.Windows.Forms.MessageBox.Show(a.Details+"\n"+a.StartTime + "\n" + a.EndTime + "\n"+a.Location, "", System.Windows.Forms.MessageBoxButtons.OK);
+                    TextBox tx1 = new TextBox();
+                    TextBox tx2 = new TextBox();
+                    TextBox tx3 = new TextBox();
+                    using (Form frm = new Form())
+                    {
+                        tx1.Text = a.BGR.ToString();
+                        
+                        var loc = tx1.Location;
+                        loc.X = 20;
+                        loc.Y = 20;
+                        tx1.Location = loc;
+                        loc.Y += 20;
+                        tx2.Text = a.BGG.ToString();
+                        tx2.Location = loc;
+                        loc.Y += 20;
+                        tx3.Text = a.BGB.ToString();
+
+                        tx3.Location = loc;
+
+                        frm.Controls.Add(tx1);
+                        frm.Controls.Add(tx2);
+                        frm.Controls.Add(tx3);
+                        frm.ShowDialog();
+                    }
+                    foreach(var b in schedule)
+                    {
+                        if(b._Short == a._Short)
+                        {
+                            b.BGR = Convert.ToInt32(tx1.Text);
+                            b.BGG = Convert.ToInt32(tx2.Text);
+                            b.BGB = Convert.ToInt32(tx3.Text);
+                        }
+                        
+                    }
+                    SetAppointments();
+                    break;
+                }
+            }
         }
 
         private void DisplayMonthChanged(MonthChangedEventArgs e)
@@ -96,15 +147,14 @@ namespace WAT
         {
             if (list == null)
                 return false;
-            Directory.CreateDirectory(filePath);
-            using (FileStream stream = File.Open(filePath + "\\" + fileName, FileMode.Create))
-            {
-                serializer.Serialize(stream, list);
-            }
-            return true;
             try
             {
-
+                Directory.CreateDirectory(filePath);
+                using (FileStream stream = File.Open(filePath + "\\" + fileName, FileMode.Create))
+                {
+                    serializer.Serialize(stream, list);
+                }
+                return true;
             }
             catch
             {
@@ -363,6 +413,7 @@ namespace WAT
                 Properties.Settings.Default.Group = "";
                 Properties.Settings.Default.Save();
             }
+            writeScheduleToXMLFile(envPath, "default.xml", schedule);
         }
 
         private async Task PageLoad(int TimeOut)
