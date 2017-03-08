@@ -225,43 +225,53 @@ namespace WAT
             progress.Value = 15;
             await PageLoad(10);
             //
-            string[] parts2 = webB.Url.AbsoluteUri.Split('?');
-            string tmp = parts2[1];
-            if (parts2.Length > 2)
-                for (int i = 1; i < parts2.Length; i++)
-                    tmp += "?" + parts2[i];
+            
+            try
+            {
+                string[] parts2 = webB.Url.AbsoluteUri.Split('?');
+                string tmp = parts2[1];
+                if (parts2.Length > 2)
+                    for (int i = 1; i < parts2.Length; i++)
+                        tmp += "?" + parts2[i];
 
-            string[] args = tmp.Split('&');
-            string str;
-            if (seasonNum == 0)
-            {
-                str = "2";
+                string[] args = tmp.Split('&');
+                string str;
+                if (seasonNum == 0)
+                {
+                    str = "2";
+                }
+                else
+                {
+                    str = "1";
+                }
+                int year = when.Year - 1;
+                if (when.Month > 7)
+                    year++;
+                string URl = "https://s1.wcy.wat.edu.pl/ed/logged_inc.php?" + args[0] + "&mid=328&iid=" + year + str + "&exv=" + groupNumber + "&pos=0&rdo=1&" + args[args.Length - 1];
+                webB.Navigate(URl);
+                //
+                progress.Value = 30;
+                await PageLoad(10);
+                //
+                //webB.Document.InvokeScript("showGroupPlan", new string[] { groupNumber });
+                //
+                //progress.Value = 45;
+                //await PageLoad(10);
+                //
+                WebClient webClient = new WebClient();
+                webClient.DownloadFileCompleted += asyncCompletedEventHandler;
+                webClient.DownloadProgressChanged += downloadProgressChangedEventHandler;
+                Uri uri = new Uri("https://s1.wcy.wat.edu.pl/ed/" + webB.Document.InvokeScript("prepareURL") + "DTXT");
+                Directory.CreateDirectory(envPath);
+                progress.Value = 50;
+                webClient.DownloadFileAsync(uri, envPath + "\\tmp");
             }
-            else
+            catch
             {
-                str = "1";
+                System.Windows.Forms.MessageBox.Show("Nie można nawiązać połączenia z serwerem!");
+                textBox.Visibility = Visibility.Hidden;
+
             }
-            int year = when.Year - 1;
-            if (when.Month > 7)
-                year++;
-            string URl = "https://s1.wcy.wat.edu.pl/ed/logged_inc.php?" + args[0] + "&mid=328&iid=" + year + str + "&exv=" + groupNumber + "&pos=0&rdo=1&" + args[args.Length - 1];
-            webB.Navigate(URl);
-            //
-            progress.Value = 30;
-            await PageLoad(10);
-            //
-            //webB.Document.InvokeScript("showGroupPlan", new string[] { groupNumber });
-            //
-            //progress.Value = 45;
-            //await PageLoad(10);
-            //
-            WebClient webClient = new WebClient();
-            webClient.DownloadFileCompleted += asyncCompletedEventHandler;
-            webClient.DownloadProgressChanged += downloadProgressChangedEventHandler;
-            Uri uri = new Uri("https://s1.wcy.wat.edu.pl/ed/" + webB.Document.InvokeScript("prepareURL") + "DTXT");
-            Directory.CreateDirectory(envPath);
-            progress.Value = 50;
-            webClient.DownloadFileAsync(uri, envPath + "\\tmp");
         }
 
         public void button_ShowChanges_Click(object sender, RoutedEventArgs e)

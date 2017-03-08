@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:WAT"
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="WAT.MainWindow"
         mc:Ignorable="d"
-    WindowStyle="None" 
+        WindowStyle="None" 
         Title="WAT - Plan Zajęć" Height="742" Width="825"
         BorderThickness="2" 
         BorderBrush="Black"
