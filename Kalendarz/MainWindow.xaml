@@ -987,20 +987,6 @@
                                 </LinearGradientBrush>
                             </Separator.Background>
                         </Separator>
-                        <MenuItem Header="_Sprawdź wolne terminy..." FontFamily="Tahoma" FontSize="14" Foreground="#FF707070" BorderThickness="0" BorderBrush="#FF2E2E2E" Click="MenuItem_Click_2">
-                            <MenuItem.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF2E2E2E" Offset="0"/>
-                                </LinearGradientBrush>
-                            </MenuItem.Background>
-                        </MenuItem>
-                        <Separator >
-                            <Separator.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF2E2E2E" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Separator.Background>
-                        </Separator>
                         <MenuItem Header="_Sprawdź czy są zmiany..." Click="MenuItem_Click" FontFamily="Tahoma" FontSize="14" Foreground="#FF707070" BorderThickness="0" BorderBrush="#FF2E2E2E">
                             <MenuItem.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1033,7 +1019,7 @@
                         <GradientStop Color="#FF3F46C7" Offset="1"/>
                     </LinearGradientBrush>
                 </Grid.Background>
-                <cal:MonthView x:Name="Calendar" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                <cal:MonthView x:Name="Calendar" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"/>
                 <StackPanel x:Name="textBox" Margin="172,109,182,122"  Height="274" >
                     <TextBox  TextWrapping="Wrap" Text="Praca w toku..." TextAlignment="Center" VerticalContentAlignment="Center" Background="#7F000000" Cursor="Wait" FontSize="18" FontWeight="Bold" Height="226"/>
                     <ProgressBar x:Name="progress" Height="38" VerticalAlignment="Top" Background="#FF2B39C5"/>

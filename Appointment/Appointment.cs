@@ -14,6 +14,13 @@ namespace Appointment
         [XmlIgnore]
         private static int nextID;
 
+        [XmlIgnore]
+        public static TimeSpan[] PossibleStartTimes = new TimeSpan[] {
+            TimeSpan.Parse("8:00"), TimeSpan.Parse("9:50"), TimeSpan.Parse("11:40"), TimeSpan.Parse("13:30"),
+            TimeSpan.Parse("15:45"), TimeSpan.Parse("17:35"), TimeSpan.Parse("19:25")
+        };
+
+
         public int _AppointmentID { get; set; }
         public string _Subject { get; set; }
         public string _Short { get; set; }
@@ -67,6 +74,11 @@ namespace Appointment
         {
             return (_Subject == compareTo._Subject && _Location == compareTo._Location && _Details == compareTo._Details && _StartTime == compareTo._StartTime && _EndTime == compareTo._EndTime && _reccreatedDate == compareTo._reccreatedDate);
         }
+
+        public bool IsInSameTime(Appointment compereTo) {
+            return this._StartTime == compereTo._StartTime;
+        }
+
         #region VB
 
         public int AppointmentID

@@ -987,20 +987,6 @@
                                 </LinearGradientBrush>
                             </Separator.Background>
                         </Separator>
-                        <MenuItem Header="_Sprawdź wolne terminy..." FontFamily="Tahoma" FontSize="14" Foreground="#FF707070" BorderThickness="0" BorderBrush="#FF2E2E2E" Click="MenuItem_Click_2">
-                            <MenuItem.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF2E2E2E" Offset="0"/>
-                                </LinearGradientBrush>
-                            </MenuItem.Background>
-                        </MenuItem>
-                        <Separator >
-                            <Separator.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF2E2E2E" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Separator.Background>
-                        </Separator>
                         <MenuItem Header="_Sprawdź czy są zmiany..." Click="MenuItem_Click" FontFamily="Tahoma" FontSize="14" Foreground="#FF707070" BorderThickness="0" BorderBrush="#FF2E2E2E">
                             <MenuItem.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

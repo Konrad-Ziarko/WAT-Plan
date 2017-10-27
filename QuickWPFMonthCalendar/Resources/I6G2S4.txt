@@ -1,0 +1,102 @@
+Temat,Lokalizacja,Data rozpoczêcia,Czas rozpoczêcia,Data zakoñczenia,Czas zakoñczenia,Przypomnienie w³./wy³.,Data przypomnienia,Czas przypomnienia
+Inauguracja (SO) [1],316 S,2017-02-24,11:40,2017-02-24,13:15,Fa³sz,2017-02-24,11:40
+Bezpieczeñstwo i higiena pracy (w) [1],316 S,2017-02-24,13:30,2017-02-24,15:05,Fa³sz,2017-02-24,13:30
+Metody i techniki symulacji komputerowej (w) [1],314 S,2017-02-27,08:00,2017-02-27,09:35,Fa³sz,2017-02-27,08:00
+Metody i zadania rozpoznawania wzorców (w) [1],101 65,2017-02-28,08:00,2017-02-28,09:35,Fa³sz,2017-02-28,08:00
+Metody i zadania rozpoznawania wzorców (w) [2],101 65,2017-02-28,09:50,2017-02-28,11:25,Fa³sz,2017-02-28,09:50
+Modelowanie systemów teleinformatycznych (w) [1],101 65,2017-02-28,11:40,2017-02-28,13:15,Fa³sz,2017-02-28,11:40
+Systemy baz danych (w) [1],314 S,2017-03-02,08:00,2017-03-02,09:35,Fa³sz,2017-03-02,08:00
+Ergonomia systemów interaktywnych (w) [1],223 65,2017-03-02,09:50,2017-03-02,11:25,Fa³sz,2017-03-02,09:50
+Trends in Computer Technology (w) [1],106 65,2017-03-02,11:40,2017-03-02,13:15,Fa³sz,2017-03-02,11:40
+Trends in Computer Technology (w) [2],121 65,2017-03-03,11:40,2017-03-03,13:15,Fa³sz,2017-03-03,11:40
+Nowoczesne metody i techniki zarz¹dzania (w) [1],314 S,2017-03-06,08:00,2017-03-06,09:35,Fa³sz,2017-03-06,08:00
+Metody i zadania rozpoznawania wzorców (w) [3],101 65,2017-03-07,08:00,2017-03-07,09:35,Fa³sz,2017-03-07,08:00
+Metody i zadania rozpoznawania wzorców (w) [4],101 65,2017-03-07,09:50,2017-03-07,11:25,Fa³sz,2017-03-07,09:50
+Systemy rozproszone (w) [1],125 65,2017-03-07,11:40,2017-03-07,13:15,Fa³sz,2017-03-07,11:40
+Systemy baz danych (w) [2],314 S,2017-03-09,08:00,2017-03-09,09:35,Fa³sz,2017-03-09,08:00
+Ergonomia systemów interaktywnych (w) [2],101 65,2017-03-09,09:50,2017-03-09,11:25,Fa³sz,2017-03-09,09:50
+Trends in Computer Technology (w) [3],101 65,2017-03-09,11:40,2017-03-09,13:15,Fa³sz,2017-03-09,11:40
+Procesy stochastyczne (w) [1],314 S,2017-03-09,13:30,2017-03-09,15:05,Fa³sz,2017-03-09,13:30
+Trends in Computer Technology (w) [4],101 65,2017-03-10,11:40,2017-03-10,13:15,Fa³sz,2017-03-10,11:40
+Metody i techniki symulacji komputerowej (w) [2],314 S,2017-03-13,08:00,2017-03-13,09:35,Fa³sz,2017-03-13,08:00
+Diagnostyka i wiarygodnoœæ SK (w) [1],314 S,2017-03-13,15:45,2017-03-13,17:20,Fa³sz,2017-03-13,15:45
+Metody i zadania rozpoznawania wzorców (w) [5],101 65,2017-03-14,08:00,2017-03-14,09:35,Fa³sz,2017-03-14,08:00
+Metody i zadania rozpoznawania wzorców (w) [6],101 65,2017-03-14,09:50,2017-03-14,11:25,Fa³sz,2017-03-14,09:50
+Systemy rozproszone (w) [2],205 65,2017-03-14,11:40,2017-03-14,13:15,Fa³sz,2017-03-14,11:40
+Systemy baz danych (w) [3],314 S,2017-03-16,08:00,2017-03-16,09:35,Fa³sz,2017-03-16,08:00
+Ergonomia systemów interaktywnych (w) [3],101 65,2017-03-16,09:50,2017-03-16,11:25,Fa³sz,2017-03-16,09:50
+Modelowanie systemów teleinformatycznych (w) [2],252 S,2017-03-16,11:40,2017-03-16,13:15,Fa³sz,2017-03-16,11:40
+Procesy stochastyczne (w) [2],314 S,2017-03-16,13:30,2017-03-16,15:05,Fa³sz,2017-03-16,13:30
+Diagnostyka i wiarygodnoœæ SK (w) [2],317 S,2017-03-17,15:45,2017-03-17,17:20,Fa³sz,2017-03-17,15:45
+Nowoczesne metody i techniki zarz¹dzania (w) [2],314 S,2017-03-20,08:00,2017-03-20,09:35,Fa³sz,2017-03-20,08:00
+Metody i zadania rozpoznawania wzorców (w) [7],101 65,2017-03-21,08:00,2017-03-21,09:35,Fa³sz,2017-03-21,08:00
+Trends in Computer Technology (w) [5],121 65,2017-03-21,09:50,2017-03-21,11:25,Fa³sz,2017-03-21,09:50
+Systemy rozproszone (w) [3],309 S,2017-03-21,11:40,2017-03-21,13:15,Fa³sz,2017-03-21,11:40
+Modelowanie systemów teleinformatycznych (w) [3],252 S,2017-03-22,15:45,2017-03-22,17:20,Fa³sz,2017-03-22,15:45
+Us³ugi sieciowe w systemie UNIX (w) [1],101 65,2017-03-23,08:00,2017-03-23,09:35,Fa³sz,2017-03-23,08:00
+Ergonomia systemów interaktywnych (w) [4],307 S,2017-03-23,09:50,2017-03-23,11:25,Fa³sz,2017-03-23,09:50
+Modelowanie systemów teleinformatycznych (w) [4],101 65,2017-03-23,11:40,2017-03-23,13:15,Fa³sz,2017-03-23,11:40
+Procesy stochastyczne (w) [3],314 S,2017-03-23,13:30,2017-03-23,15:05,Fa³sz,2017-03-23,13:30
+Metody i techniki symulacji komputerowej (w) [3],314 S,2017-03-27,08:00,2017-03-27,09:35,Fa³sz,2017-03-27,08:00
+Metody i zadania rozpoznawania wzorców (w) [8],101 65,2017-03-28,08:00,2017-03-28,09:35,Fa³sz,2017-03-28,08:00
+Procesy stochastyczne (æ) [1],223 65,2017-03-28,09:50,2017-03-28,11:25,Fa³sz,2017-03-28,09:50
+Systemy rozproszone (w) [4],309 S,2017-03-28,11:40,2017-03-28,13:15,Fa³sz,2017-03-28,11:40
+Modelowanie systemów teleinformatycznych (w) [5],255 S,2017-03-29,15:45,2017-03-29,17:20,Fa³sz,2017-03-29,15:45
+Systemy baz danych (w) [4],314 S,2017-03-30,08:00,2017-03-30,09:35,Fa³sz,2017-03-30,08:00
+Ergonomia systemów interaktywnych (w) [5],307 S,2017-03-30,09:50,2017-03-30,11:25,Fa³sz,2017-03-30,09:50
+Us³ugi sieciowe w systemie UNIX (w) [2],101 65,2017-03-30,11:40,2017-03-30,13:15,Fa³sz,2017-03-30,11:40
+Procesy stochastyczne (w) [4],314 S,2017-03-30,13:30,2017-03-30,15:05,Fa³sz,2017-03-30,13:30
+Diagnostyka i wiarygodnoœæ SK (w) [3],317 S,2017-03-30,15:45,2017-03-30,17:20,Fa³sz,2017-03-30,15:45
+Nowoczesne metody i techniki zarz¹dzania (w) [3],314 S,2017-04-03,08:00,2017-04-03,09:35,Fa³sz,2017-04-03,08:00
+Metody i zadania rozpoznawania wzorców (w) [9],101 65,2017-04-04,08:00,2017-04-04,09:35,Fa³sz,2017-04-04,08:00
+Metody i zadania rozpoznawania wzorców (w) [10],101 65,2017-04-04,09:50,2017-04-04,11:25,Fa³sz,2017-04-04,09:50
+Systemy rozproszone (w) [5],309 S,2017-04-04,11:40,2017-04-04,13:15,Fa³sz,2017-04-04,11:40
+Us³ugi sieciowe w systemie UNIX (w) [3],106 65,2017-04-05,15:45,2017-04-05,17:20,Fa³sz,2017-04-05,15:45
+Modelowanie systemów teleinformatycznych (w) [6],314 S,2017-04-05,17:35,2017-04-05,19:10,Fa³sz,2017-04-05,17:35
+Systemy baz danych (w) [5],314 S,2017-04-06,08:00,2017-04-06,09:35,Fa³sz,2017-04-06,08:00
+Diagnostyka i wiarygodnoœæ SK (w) [4],314 S,2017-04-06,09:50,2017-04-06,11:25,Fa³sz,2017-04-06,09:50
+Procesy stochastyczne (w) [5],314 S,2017-04-06,13:30,2017-04-06,15:05,Fa³sz,2017-04-06,13:30
+Nowoczesne metody i techniki zarz¹dzania (w) [4],314 S,2017-04-11,08:00,2017-04-11,09:35,Fa³sz,2017-04-11,08:00
+Systemy rozproszone (w) [6],309 S,2017-04-11,09:50,2017-04-11,11:25,Fa³sz,2017-04-11,09:50
+Procesy stochastyczne (æ) [2],125 65,2017-04-11,11:40,2017-04-11,13:15,Fa³sz,2017-04-11,11:40
+Systemy baz danych (w) [6],314 S,2017-04-13,08:00,2017-04-13,09:35,Fa³sz,2017-04-13,08:00
+Diagnostyka i wiarygodnoœæ SK (w) [5],314 S,2017-04-13,09:50,2017-04-13,11:25,Fa³sz,2017-04-13,09:50
+Procesy stochastyczne (w) [6],314 S,2017-04-13,13:30,2017-04-13,15:05,Fa³sz,2017-04-13,13:30
+Us³ugi sieciowe w systemie UNIX (w) [4],101 65,2017-04-20,08:00,2017-04-20,09:35,Fa³sz,2017-04-20,08:00
+Diagnostyka i wiarygodnoœæ SK (w) [6],314 S,2017-04-20,09:50,2017-04-20,11:25,Fa³sz,2017-04-20,09:50
+Procesy stochastyczne (w) [7],314 S,2017-04-20,13:30,2017-04-20,15:05,Fa³sz,2017-04-20,13:30
+Us³ugi sieciowe w systemie UNIX (w) [5],205 65,2017-04-21,11:40,2017-04-21,13:15,Fa³sz,2017-04-21,11:40
+Nowoczesne metody i techniki zarz¹dzania (w) [5],314 S,2017-04-25,08:00,2017-04-25,09:35,Fa³sz,2017-04-25,08:00
+Systemy rozproszone (w) [7],201 65,2017-04-25,11:40,2017-04-25,13:15,Fa³sz,2017-04-25,11:40
+Ergonomia systemów interaktywnych (w) [6],308 S,2017-04-27,09:50,2017-04-27,11:25,Fa³sz,2017-04-27,09:50
+Modelowanie systemów teleinformatycznych (w) [7],223 65,2017-04-27,11:40,2017-04-27,13:15,Fa³sz,2017-04-27,11:40
+Diagnostyka i wiarygodnoœæ SK (w) [7],314 S,2017-04-27,13:30,2017-04-27,15:05,Fa³sz,2017-04-27,13:30
+Diagnostyka i wiarygodnoœæ SK (w) [8],314 S,2017-05-04,09:50,2017-05-04,11:25,Fa³sz,2017-05-04,09:50
+Modelowanie systemów teleinformatycznych (w) [8],309 S,2017-05-04,11:40,2017-05-04,13:15,Fa³sz,2017-05-04,11:40
+Trends in Computer Technology (w) [6],101 65,2017-05-05,11:40,2017-05-05,13:15,Fa³sz,2017-05-05,11:40
+Nowoczesne metody i techniki zarz¹dzania (æ) [1],125 65,2017-05-09,08:00,2017-05-09,09:35,Fa³sz,2017-05-09,08:00
+Procesy stochastyczne (æ) [3],223 65,2017-05-09,09:50,2017-05-09,11:25,Fa³sz,2017-05-09,09:50
+Systemy rozproszone (w) [8],309 S,2017-05-09,11:40,2017-05-09,13:15,Fa³sz,2017-05-09,11:40
+Trends in Computer Technology (w) [7],101 65,2017-05-11,08:00,2017-05-11,09:35,Fa³sz,2017-05-11,08:00
+Trends in Computer Technology (w) [8],101 65,2017-05-11,09:50,2017-05-11,11:25,Fa³sz,2017-05-11,09:50
+Procesy stochastyczne (æ) [4],101 65,2017-05-16,08:00,2017-05-16,09:35,Fa³sz,2017-05-16,08:00
+Systemy rozproszone (w) [9],309 S,2017-05-16,11:40,2017-05-16,13:15,Fa³sz,2017-05-16,11:40
+Procesy stochastyczne (æ) [5],201 65,2017-05-18,08:00,2017-05-18,09:35,Fa³sz,2017-05-18,08:00
+Ergonomia systemów interaktywnych (w) [7],308 S,2017-05-18,09:50,2017-05-18,11:25,Fa³sz,2017-05-18,09:50
+Trends in Computer Technology (w) [9],101 65,2017-05-19,09:50,2017-05-19,11:25,Fa³sz,2017-05-19,09:50
+Trends in Computer Technology (w) [10],101 65,2017-05-19,11:40,2017-05-19,13:15,Fa³sz,2017-05-19,11:40
+Metody i techniki symulacji komputerowej (w) [4],314 S,2017-05-22,08:00,2017-05-22,09:35,Fa³sz,2017-05-22,08:00
+Procesy stochastyczne (æ) [6],204 65,2017-05-23,09:50,2017-05-23,11:25,Fa³sz,2017-05-23,09:50
+Systemy rozproszone (w) [10],309 S,2017-05-23,11:40,2017-05-23,13:15,Fa³sz,2017-05-23,11:40
+Trends in Computer Technology (L) [1],106 65,2017-05-26,15:45,2017-05-26,17:20,Fa³sz,2017-05-26,15:45
+Trends in Computer Technology (L) [2],106 65,2017-05-26,17:35,2017-05-26,19:10,Fa³sz,2017-05-26,17:35
+Nowoczesne metody i techniki zarz¹dzania (w) [6],314 S,2017-05-29,08:00,2017-05-29,09:35,Fa³sz,2017-05-29,08:00
+Nowoczesne metody i techniki zarz¹dzania (æ) [2],205 65,2017-05-30,11:40,2017-05-30,13:15,Fa³sz,2017-05-30,11:40
+Procesy stochastyczne (æ) [7],203 65,2017-06-06,08:00,2017-06-06,09:35,Fa³sz,2017-06-06,08:00
+Trends in Computer Technology (L) [3],101 65,2017-06-08,15:45,2017-06-08,17:20,Fa³sz,2017-06-08,15:45
+Trends in Computer Technology (L) [4],101 65,2017-06-08,17:35,2017-06-08,19:10,Fa³sz,2017-06-08,17:35
+Trends in Computer Technology (L) [5],101 65,2017-06-08,19:25,2017-06-08,21:00,Fa³sz,2017-06-08,19:25
+Nowoczesne metody i techniki zarz¹dzania (w) [7],314 S,2017-06-12,08:00,2017-06-12,09:35,Fa³sz,2017-06-12,08:00
+Procesy stochastyczne (w) [8],314 S,2017-06-19,08:00,2017-06-19,09:35,Fa³sz,2017-06-19,08:00
+Systemy baz danych (w) [7],313 S,2017-06-20,08:00,2017-06-20,09:35,Fa³sz,2017-06-20,08:00
+Nowoczesne metody i techniki zarz¹dzania (æ) [3],101 65,2017-06-20,11:40,2017-06-20,13:15,Fa³sz,2017-06-20,11:40
