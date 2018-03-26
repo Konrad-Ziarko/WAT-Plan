@@ -964,13 +964,16 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="25,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" ToolTip="Login" FontSize="14" FontWeight="Bold"/>
-            <PasswordBox x:Name="textBox1" HorizontalAlignment="Left" Margin="25,78,0,0" VerticalAlignment="Top" Width="152" Height="25" FontSize="14" FontWeight="Bold"/>
+            <PasswordBox x:Name="textBox1" HorizontalAlignment="Left" Margin="25,78,0,0" VerticalAlignment="Top" Width="152" Height="25" FontSize="14" FontWeight="Bold" ToolTip="Hasło"/>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="25,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" ToolTip="Grupa" FontSize="14" FontWeight="Bold"/>
             <CheckBox x:Name="checkBox" Content="Zapamiętaj" HorizontalAlignment="Left" Margin="25,234,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>
             <ComboBox x:Name="comboBox" SelectedIndex="0" HorizontalAlignment="Left" Margin="25,183,0,0" VerticalAlignment="Top" Width="152" FontSize="14" FontWeight="Bold">
                 <ListBoxItem Content="Letni"/>
                 <ListBoxItem Content="Zimowy"/>
             </ComboBox>
+            <TextBlock HorizontalAlignment="Left" Margin="25,6,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="25,59,0,0" TextWrapping="Wrap" Text="Hasło" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="25,113,0,0" TextWrapping="Wrap" Text="Grupa" VerticalAlignment="Top"/>
 
         </Grid>
     </DockPanel>

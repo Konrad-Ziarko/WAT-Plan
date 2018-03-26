@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="WAT.ComparePlans"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WAT"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+
+        <TextBox Name="groupsBox" Height="23" Margin="25,28,25,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock Text="Nazwy grup oddzielone przecinkami" HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        <TextBox Name="teacherBox" Height="23" Margin="25,87,25,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock Text="Nazwisko nauczyciela" Margin="25,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        <Button Content="OK" Margin="25,138,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="114" Click="Button_Click"/>
+    </Grid>
+</UserControl>

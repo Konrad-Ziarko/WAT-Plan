@@ -11,6 +11,8 @@ using System.Text;
 using QuickWPFMonthCalendar;
 using System.Drawing;
 using System.Threading;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace WAT {
     /// <summary>
@@ -25,19 +27,23 @@ namespace WAT {
         private static SemaphoreSlim teacherSemaphore = new SemaphoreSlim(1, 1);
 
 
-        public static System.Windows.Forms.NotifyIcon ni;
-        public static System.Windows.Forms.WebBrowser webB = new System.Windows.Forms.WebBrowser();
-        public static System.Windows.Forms.Form frm = new Form();
+        public static NotifyIcon ni;
+        public static MyWebBrowser webB = new MyWebBrowser();
+        public static Form frm = new Form();
         private string envPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\WAT - Plan";
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Appointment.Appointment>));
         private List<Appointment.Appointment> schedule;
+
+        private ComparePlans comparePlans;
+
         public MainWindow() {
             InitializeComponent();
             textBox.Visibility = Visibility.Hidden;
 
-            ni = new System.Windows.Forms.NotifyIcon();
-            ni.Icon = Properties.Resources.KZ;
-            ni.Visible = true;
+            ni = new NotifyIcon {
+                Icon = Properties.Resources.KZ,
+                Visible = true
+            };
             ni.DoubleClick +=
                 delegate (object sender, EventArgs args) {
                     this.Show();
@@ -49,10 +55,13 @@ namespace WAT {
             //
             frm.Width = 500;
             frm.Height = 500;
+            frm.Controls.Add(webB);
 
             webB.ScriptErrorsSuppressed = true;
-            frm.Controls.Add(webB);
+            ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             webB.Dock = DockStyle.Fill;
+            webB.Navigate("about:blank");
+
             //load schedule
             schedule = readScheduleFromXMLFile(envPath, "default.xml");
             ///
@@ -64,6 +73,15 @@ namespace WAT {
 
             //
         }
+        
+        private bool ValidateRemoteCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors policyErrors) {
+            return policyErrors == SslPolicyErrors.None;
+        }
+        public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
+            return true;
+        }
+        
+
         private void SetAppointments() {
             Calendar.MonthAppointments = schedule.FindAll(new System.Predicate<Appointment.Appointment>((Appointment.Appointment apt) => apt.StartTime != null && Convert.ToDateTime(apt.StartTime).Month == this.Calendar.DisplayStartDate.Month && Convert.ToDateTime(apt.StartTime).Year == this.Calendar.DisplayStartDate.Year));
         }
@@ -420,11 +438,11 @@ namespace WAT {
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e) {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.Filter = "Plik tekstowy|*.txt|Wszystko|*.*";
-            ofd.Title = "Wczytaj plan zajęć";
-            ofd.InitialDirectory = envPath;
+            OpenFileDialog ofd = new OpenFileDialog {
+                Filter = "Plik tekstowy|*.txt|Wszystko|*.*",
+                Title = "Wczytaj plan zajęć",
+                InitialDirectory = envPath
+            };
 
             DialogResult openFileDialogResult = ofd.ShowDialog();
             if (openFileDialogResult == System.Windows.Forms.DialogResult.OK && ofd.FileName != "") {
@@ -440,10 +458,19 @@ namespace WAT {
 
         private async void MenuItem_Click_2(object sender, RoutedEventArgs e) {
 
-            string teacherName = "Ziarko";
-            string[] groups = new string[] { "I6G2S4", "I6B2S4", "I6B3S4" };
-            string building = "65";
-            string room = "125";
+            BaseWindow window = new BaseWindow();
+            comparePlans = new ComparePlans(ref window);
+            window.ClientArea.Content = comparePlans;
+            window.Closing += Window_Closing1Async;
+
+            window.ShowDialog();
+        }
+
+        private async void Window_Closing1Async(object sender, CancelEventArgs e) {
+            string teacherName = comparePlans.teacherName;
+            string[] groups = comparePlans.groups;
+            //string building = "65";
+            //string room = "125";
 
             //pobrac nazwy wszystkich grup
             //dla kazdej grupy pobrac plan
@@ -560,7 +587,7 @@ namespace WAT {
                     }
                     else {
                         tempDay = tempDay.AddHours(12);
-                        tempDay = tempDay.AddMinutes(25);
+                        tempDay = tempDay.AddMinutes(35);
                     }
                 }
             }
@@ -618,6 +645,8 @@ namespace WAT {
 
         private async void downloadTeacherPlan(string teacherName, int seasonNum, DateTime when, AsyncCompletedEventHandler asyncCompletedEventHandler, DownloadProgressChangedEventHandler downloadProgressChangedEventHandler) {
             await teacherSemaphore.WaitAsync();
+
+            //teacherName można by rozdzielić na imie nazwisko innaczej tylko pierwsza osoba z tym nazwiskiem będzie uwzględniona
 
             textBox.Visibility = Visibility.Visible;
             progress.Value = 0;
